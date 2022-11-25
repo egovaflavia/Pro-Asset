@@ -13,11 +13,11 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('home'));
 });
 
-// // Home > Blog
-// Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
-//     $trail->parent('home');
-//     $trail->push('Blog', route('blog'));
-// });
+// Home > User
+Breadcrumbs::for('users', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Users', route('users.index'));
+});
 
 // // Home > Blog > [Category]
 // Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {

@@ -29,6 +29,7 @@
     <!-- icons -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
+    @stack('head')
 </head>
 
 <!-- body start -->
@@ -87,7 +88,7 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
-    @stack('script')
+    @stack('body')
 
 </body>
 
