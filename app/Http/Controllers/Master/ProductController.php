@@ -43,7 +43,7 @@ class ProductController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('image', function ($row) {
-                $url = asset($row->getFirstMediaUrl());
+                $url = $row->getFirstMediaUrl();
                 $img = '<img src="' . $url . '">';
                 return $img;
             })
@@ -55,6 +55,7 @@ class ProductController extends Controller
                     </div>';
                 return $btn;
             })
+            ->rawColumns(['image', 'action'])
             ->make(true);
     }
 
