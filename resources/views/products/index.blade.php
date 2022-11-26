@@ -1,62 +1,72 @@
 @extends('layouts.app')
+@push('head')
 
+@endpush
 
 @section('content')
+
+{{ Breadcrumbs::render('users') }}
+
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Products</h2>
+    <div class="col-12">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
         </div>
-        <div class="pull-right">
-            @can('product-create')
-            <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
-            @endcan
+        @endif
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mt-0 header-title">Default Example</h4>
+                <p class="text-muted font-14 mb-3">
+                    <a class="btn btn-success" href="{{ route('products.create') }}"> Tambah</a>
+                </p>
+
+                <table id="user_tabel" class="table table-bordered dt-responsive table-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Img</th>
+                            <th>Details</th>
+                            <th width="280px">Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
+
     </div>
-</div>
+</div> <!-- end row -->
 
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
-
-
-<table class="table table-bordered">
-    <tr>
-        <th>No</th>
-        <th>Name</th>
-        <th>Details</th>
-        <th width="280px">Action</th>
-    </tr>
-    @foreach ($products as $product)
-    <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $product->name }}</td>
-        <td>{{ $product->detail }}</td>
-        <td>
-            <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
-                @can('product-edit')
-                <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
-                @endcan
-
-
-                @csrf
-                @method('DELETE')
-                @can('product-delete')
-                <button type="submit" class="btn btn-danger">Delete</button>
-                @endcan
-            </form>
-        </td>
-    </tr>
-    @endforeach
-</table>
-
-
-{!! $products->links() !!}
-
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
+
+@push('body')
+<script>
+    $(document).ready(function(){
+        $('table').DataTable({
+            // dom: 'lBfrtip',
+            //     buttons: [
+            //         'copy', 'excel', 'pdf', 'csv', 'print'
+            //     ],
+            lengthChange: false,
+            searching: false,
+            processing: true,
+            serverSide: true,
+            ajax: `{{ route('products.list') }}`,
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                {data: 'detail', name: 'detail'},
+                {data: 'image', name: 'image'},
+                {data: 'action', name: 'action'},
+            ],
+            drawCallback: function () {
+                $('.dataTables_paginate').addClass('d-flex justify-content-end');
+            }
+        });
+    });
+
+</script>
+@endpush

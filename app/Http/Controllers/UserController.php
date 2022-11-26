@@ -26,10 +26,12 @@ class UserController extends Controller
         return view('users.index');
     }
 
-    public function yajra()
+    public function list()
     {
         $data = User::all();
-        return DataTables::of($data)->make(true);
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->make(true);
     }
 
     /**

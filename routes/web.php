@@ -32,7 +32,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
+    Route::get('users/list', [UserController::class, 'list'])->name('list');
     Route::resource('users', UserController::class);
-    Route::get('yajra', [UserController::class, 'yajra'])->name('yajra');
-    Route::resource('products', ProductController::class);
+    // Route::resource('products', ProductController::class);
+
+    Route::group([
+        'prefix' => 'products',
+        'as' => 'products.',
+        'middleware' => 'auth'
+    ], function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::get('/list', [ProductController::class, 'list'])->name('list');
+        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::post('/store', [ProductController::class, 'store'])->name('store');
+    });
 });
