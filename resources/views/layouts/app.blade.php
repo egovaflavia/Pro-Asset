@@ -34,8 +34,7 @@
 
 <!-- body start -->
 
-<body class="loading" data-layout-mode="horizontal"
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+<body class="loading" data-layout-mode="horizontal">
 
     <!-- Begin page -->
     <div id="wrapper">

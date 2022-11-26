@@ -49,11 +49,12 @@
                                     <h4 class="text-uppercase mt-0">Sign In</h4>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
-                                    <input class="form-control @error('email') is-invalid @enderror" name="email"
-                                        type="email" id="email" required="" placeholder="Enter your email"
-                                        value="{{ old('email') }}" autocomplete="email" autofocus>
-                                    @error('email')
+                                    <label for="username" class="form-label">Username</label>
+                                    <input class="form-control @error('username') is-invalid @enderror"
+                                        type="text" id="username" name="username" required=""
+                                        placeholder="Enter your username" value="{{ old('username') }}"
+                                        autocomplete="username" autofocus>
+                                    @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
