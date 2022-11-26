@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.7.33 - MySQL Community Server (GPL)
+-- Host:                         localhost
+-- Server version:               5.7.24 - MySQL Community Server (GPL)
 -- Server OS:                    Win64
 -- HeidiSQL Version:             12.2.0.6576
 -- --------------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pro_asset.model_has_roles: ~1 rows (approximately)
+-- Dumping data for table pro_asset.model_has_roles: ~2 rows (approximately)
 DELETE FROM `model_has_roles`;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 1),
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pro_asset.roles: ~0 rows (approximately)
+-- Dumping data for table pro_asset.roles: ~1 rows (approximately)
 DELETE FROM `roles`;
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'Admin', 'web', '2022-11-22 22:17:28', '2022-11-22 22:17:28');
@@ -224,20 +224,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
+  UNIQUE KEY `users_email_unique` (`email`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pro_asset.users: ~1 rows (approximately)
+-- Dumping data for table pro_asset.users: ~2 rows (approximately)
 DELETE FROM `users`;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Hardik Savani', 'admin@gmail.com', NULL, '$2y$10$kOXV3CQCw0W275joD8puJOt8MD/dFzA43TOLmGuLdulDNIfcugCcq', NULL, '2022-11-22 22:17:28', '2022-11-22 22:17:28'),
-	(2, 'Madonna Kerr', 'nyda@mailinator.com', NULL, '$2y$10$0OOsLPQcBfdEhO28XIQ5juppkcuHtSI9C/XfNKzTSn10iej/jkXEe', NULL, '2022-11-23 07:28:06', '2022-11-23 07:28:06');
+INSERT INTO `users` (`id`, `name`, `email`, `username`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'Hardik Savani', 'admin@gmail.com', 'egovaflavia', NULL, '$2y$10$kOXV3CQCw0W275joD8puJOt8MD/dFzA43TOLmGuLdulDNIfcugCcq', NULL, '2022-11-22 22:17:28', '2022-11-22 22:17:28'),
+	(2, 'Madonna Kerr', 'nyda@mailinator.com', '', NULL, '$2y$10$0OOsLPQcBfdEhO28XIQ5juppkcuHtSI9C/XfNKzTSn10iej/jkXEe', NULL, '2022-11-23 07:28:06', '2022-11-23 07:28:06');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
