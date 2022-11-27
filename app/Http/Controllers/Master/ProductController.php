@@ -44,7 +44,7 @@ class ProductController extends Controller
             ->addIndexColumn()
             ->addColumn('image', function ($row) {
                 $url = $row->getFirstMediaUrl();
-                $img = '<img src="' . $url . '">';
+                $img = '<img class="img-responsive" src="' . $url . '">';
                 return $img;
             })
             ->addColumn('action', function ($row) {

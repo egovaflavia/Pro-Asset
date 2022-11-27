@@ -22,17 +22,19 @@
                     <a class="btn btn-success" href="{{ route('products.create') }}"> Tambah</a>
                 </p>
 
-                <table id="user_tabel" class="table table-bordered dt-responsive table-responsive nowrap">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Img</th>
-                            <th>Details</th>
-                            <th width="280px">Action</th>
-                        </tr>
-                    </thead>
-                </table>
+                <div class="table-responsive">
+                    <table id="user_tabel" class="table table-bordered dt-responsive table-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Img</th>
+                                <th>Details</th>
+                                <th width="280px">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
 
